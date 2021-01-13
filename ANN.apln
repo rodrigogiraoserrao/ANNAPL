@@ -3,6 +3,8 @@
     
     (⎕IO ⎕ML) ← 0 1
     
+    ⍝ Learning parameter
+    epsilon ← 0.01
     ⍝ Vector of namespaces holding the layers of the network.
     layers ← 0⍴#
     ⍝ Loss function namespace of the network.
@@ -12,7 +14,7 @@
         ⍝ Compute the output of the network on an input vector.
         ⍝ ⍵: network input array.
         ⍝ returns an array with the output of the network.
-        ⊃{⍵,⊂⍺.Feed⊃⌽⍵}/ (⊂⊂⍵),⍨⌽⎕THIS.layers
+        ⊃{⍵,⊂⍺.Feed⊃⌽⍵}/ (⊂⊂⍵),⍨⌽layers
     }
     
     BackProp ← {
@@ -35,9 +37,27 @@
             dW ← db+.×⍉⊃xs
             (1↓layers) (1↓xs) (dWs,⊂dW) (dbs,⊂db) (dxs,⊂dx)
         }
-        r ← BP⍣(≢⎕THIS.layers) ⊢ (⌽⎕THIS.layers) xs dWs dbs dxs
+        r ← BP⍣(≢layers) ⊢ (⌽layers) xs dWs dbs dxs
         (_ _ dWs dbs _) ← r
         (⌽dWs) (⌽dbs)
+    }
+    
+    Train ← {
+        ⍝ Train the network on a given input/output sample.
+        ⍝ ⍵: network input.
+        ⍝ ⍺: expected network output.
+        ⍝ Returns a reference to the network itself.
+        xs ← Feed ⍵
+        ds ← ⍺ BackProp xs              
+        T ← {
+            (dWs dbs) ← ⍵
+            (⊃⎕THIS.layers).weights -← epsilon×⊃dWs
+            (⊃⎕THIS.layers).bias -← epsilon×⊃dbs
+            ⎕THIS.layers ← 1⌽⎕THIS.layers
+            (1⌽dWs) (1⌽dbs)
+        }
+        _ ← T⍣(≢layers) ⊢ ds
+        ⎕THIS
     }
 :EndNamespace          
 
