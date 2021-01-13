@@ -1,0 +1,11 @@
+:Namespace ANN
+    ⍝ Hold the information needed for an artificial neural network.
+    
+    (⎕IO ⎕ML) ← 0 1
+    
+    ⍝ Vector of namespaces holding the layers of the network.
+    layers ← 0⍴#
+    
+    loss ← #.LossFns.MSELoss
+:EndNamespace
+
