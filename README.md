@@ -4,7 +4,7 @@ Artificial Neural Networks in APL.
 
 ## How To Use
 
-Clone this repository to the directory `dir`, then fire up your interpreter and create a link with the `ANNAPL` namespace:
+Clone this repository to a directory, say `c:\tmp`, then fire up your interpreter and create a link with the `ANNAPL` namespace:
 
 ```
       ]create ANNAPL c:\tmp\ANNAPL
