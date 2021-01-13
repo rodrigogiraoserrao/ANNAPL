@@ -1,4 +1,4 @@
- makeNormalRandomArray←{
+ MakeNormalRandomArray←{
     ⍝ Create array with normally distributed random values.
     ⍝ ⍵: shape of the result array.
     ⍝ ⍺: mean and standard deviation of normal distribution used, defaults to (0, 1).
