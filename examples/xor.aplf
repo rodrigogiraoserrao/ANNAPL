@@ -23,12 +23,14 @@
     R ← (⌊0.5+⊢) ⍝ Round to nearest integer.
     PP ← { ⍝ Print performance of the net.
         ⎕← 'A B out'
-        ⎕← (↑refins) , R∘⊃∘⌽∘net.Feed∘⍪¨ refins
+        ⎕← (↑refins) , outs ← R∘⊃∘⌽∘net.Feed∘⍪¨ refins
+        ⎕← 'Accuracy is ', 25×+/refouts=outs
     }
     refins ← ↓⍉2 2⊤⍳4   ⍝ Reference inputs and outputs.
     refouts ← ≠/↑refins
     PP net
 
+    ⍞← 'Training... '
     :For _ :In ⍳300
         :For in :In ⍳4
             in ← ⍪2 2⊤in
@@ -37,6 +39,7 @@
             _ ← out net.Train in
         :EndFor
     :EndFor
+    ⍞← '(done)'
 
     PP net
 ∇
