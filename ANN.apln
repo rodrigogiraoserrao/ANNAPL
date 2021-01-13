@@ -12,7 +12,32 @@
         ⍝ Compute the output of the network on an input vector.
         ⍝ ⍵: network input array.
         ⍝ returns an array with the output of the network.
-        ⊃{⍺.Feed ⍵}/ (⊂⍵),⍨⌽⎕THIS.layers
+        ⊃{⍵,⊂⍺.Feed⊃⌽⍵}/ (⊂⊂⍵),⍨⌽⎕THIS.layers
+    }
+    
+    BackProp ← {
+        ⍝ Compute the derivatives of the network parameters w.r.t. some network output.
+        ⍝ ⍵: consecutive layer outputs.
+        ⍝ ⍺: expected network output.
+        dWs ← ⍬
+        dbs ← ⍬             
+        xs ← 1↓⌽⍵
+        dxs ← ⊂⍺ Loss.DLoss⊃⌽⍵
+        BP ← {                                             
+            ⍝ Auxiliary function.
+            ⍝ The layers and xs are in the reverse natural order of the network,
+            ⍝ while the derivative arrays are in the natural order.
+            (layers xs dWs dbs dxs) ← ⍵
+            l ← ⊃layers
+            x ← l.bias+l.weights+.×⊃xs
+            db ← (⊃⌽dxs)×l.ActivationFn.DF x
+            dx ← (⍉l.weights)+.×db
+            dW ← db+.×⍉⊃xs
+            (1↓layers) (1↓xs) (dWs,⊂dW) (dbs,⊂db) (dxs,⊂dx)
+        }
+        r ← BP⍣(≢⎕THIS.layers) ⊢ (⌽⎕THIS.layers) xs dWs dbs dxs
+        (_ _ dWs dbs _) ← r
+        (⌽dWs) (⌽dbs)
     }
 :EndNamespace          
 
