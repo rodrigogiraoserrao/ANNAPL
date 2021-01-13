@@ -6,6 +6,6 @@
     ⍝ Vector of namespaces holding the layers of the network.
     layers ← 0⍴#
     
-    loss ← #.LossFns.MSELoss
+    loss ← 0⍨
 :EndNamespace
 
