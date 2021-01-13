@@ -1,0 +1,23 @@
+:Namespace MSELoss
+    ⍝ Mean Squared Error loss function.
+    
+    (⎕IO ⎕ML) ← 0 1
+    
+    loss ← {
+        ⍝ Computes the loss between the expected output and the target.
+        ⍝ ⍵: array with the network output.
+        ⍝ ⍺: array with the expected output, same shape as ⍵.
+        ⍝ returns a numeric scalar.
+        d ← 2*⍨,⍵-⍺
+        (+/d)÷≢d
+    }           
+    
+    dloss ← {
+        ⍝ Derivative of the loss function w.r.t. network output.
+        ⍝ ⍵: array with the network output.
+        ⍝ ⍺: array with the expected output, same shape as ⍵.
+        ⍝ returns an array of derivatives with the shape of ⍵.
+        n ← ×/⍴⍵
+        n÷⍨2×⍵-⍺
+    }
+:EndNamespace
