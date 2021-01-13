@@ -27,7 +27,7 @@
     layer2.ActivationFn ← ⎕NS #.ActivationFns.Sigmoid
 
     net ← ⎕NS #.ANN
-    net.epsilon ← 0.03
+    net.lr ← 0.03
     net.layers ← layer1 layer2
     net.LossFn ← ⎕NS #.LossFns.MSELoss
 

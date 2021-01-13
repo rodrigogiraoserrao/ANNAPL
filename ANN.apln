@@ -3,8 +3,8 @@
     
     (⎕IO ⎕ML) ← 0 1
     
-    ⍝ Learning parameter
-    epsilon ← 0.01
+    ⍝ Learning rate parameter
+    lr ← 0.01
     ⍝ Vector of namespaces holding the layers of the network.
     layers ← 0⍴#
     ⍝ Loss function namespace of the network.
@@ -51,8 +51,8 @@
         ds ← ⍺ BackProp xs              
         T ← {
             (dWs dbs) ← ⍵
-            (⊃⎕THIS.layers).weights -← epsilon×⊃dWs
-            (⊃⎕THIS.layers).bias -← epsilon×⊃dbs
+            (⊃⎕THIS.layers).weights -← lr×⊃dWs
+            (⊃⎕THIS.layers).bias -← lr×⊃dbs
             ⎕THIS.layers ← 1⌽⎕THIS.layers
             (1⌽dWs) (1⌽dbs)
         }

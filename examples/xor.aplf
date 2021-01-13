@@ -18,7 +18,7 @@
     net ← ⎕NS #.ANN
     net.layers ← layer1 layer2
     net.LossFn ← #.LossFns.MSELoss
-    net.epsilon ← 0.1
+    net.lr ← 0.1
 
     R ← (⌊0.5+⊢) ⍝ Round to nearest integer.
     PP ← { ⍝ Print performance of the net.
