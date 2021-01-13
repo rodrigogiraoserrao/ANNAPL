@@ -1,0 +1,21 @@
+:Namespace Layer
+    ⍝ Fully connected layer of an artificial neural network.
+    
+    (⎕IO ⎕ML) ← 0 1
+    
+    ⍝ Parameters of the layer.
+    shape ← ⍬                            ⍝ Shape of the layer.
+    weights ← ⍬                          ⍝ Tensor with connection weights from previous layer.
+    bias ← ⍬                             ⍝ Tensor with bias for this layer.
+    activationFn ← #.ActivationFns.ReLU  ⍝ Activation function to process the output of this layer.
+    
+    init ← {
+        ⍝ Initialise a layer with given shape.
+        ⍝ ⍵: array with shape of the layer.
+        ⍝ returns a reference to the namespace itself.
+        ⎕THIS.shape ← ⍵
+        ⎕THIS.weights ← (0,÷0.5*⍨×/  ⍵) #.Utils.makeNormalRandomArray   ⍵
+        ⎕THIS.bias    ← (0,÷0.5*⍨×/1↓⍵) #.Utils.makeNormalRandomArray 1↓⍵
+        ⎕THIS
+    }
+:EndNamespace
