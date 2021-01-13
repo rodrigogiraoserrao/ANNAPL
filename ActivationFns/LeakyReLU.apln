@@ -6,13 +6,13 @@
     ⍝ Typically set to a positive value less than 1.
     leaky ← 0.01
     
-    f ← {
+    F ← {
         ⍝ Forward pass of the Leaky ReLU.
         ⍝ ⍵: array with values.
         (leaky×0⌊⍵)+0⌈⍵
     }
     
-    df ← {
+    DF ← {
         ⍝ Derivative of the Leaky ReLU activation function.
         ⍝ ⍵: array with values.
         (leaky××0⌊⍵)+0<⍵

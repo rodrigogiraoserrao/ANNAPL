@@ -2,13 +2,13 @@
     ⍝ Rectified Linear Unit activation function.
     (⎕IO ⎕ML) ← 0 1
     
-    f ← {
+    F ← {
         ⍝ Forward pass of the ReLU activation function.
         ⍝ ⍵: array with values.
         0⌈⍵
     }
     
-    df ← {
+    DF ← {
         ⍝ Derivative of the ReLU activation function.
         ⍝ ⍵: array with values to find the derivative on.
         0<⍵

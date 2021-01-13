@@ -14,8 +14,8 @@
         ⍝ ⍵: array with shape of the layer.
         ⍝ returns a reference to the namespace itself.
         ⎕THIS.shape ← ⍵
-        ⎕THIS.weights ← (0,÷0.5*⍨×/  ⍵) #.Utils.makeNormalRandomArray   ⍵
-        ⎕THIS.bias    ← (0,÷0.5*⍨×/1↓⍵) #.Utils.makeNormalRandomArray 1↓⍵
+        ⎕THIS.weights ← (0,÷0.5*⍨×/  ⍵) #.Utils.MakeNormalRandomArray   ⍵
+        ⎕THIS.bias    ← (0,÷0.5*⍨×/1↓⍵) #.Utils.MakeNormalRandomArray 1↓⍵
         ⎕THIS.ActivationFn ← #.ActivationFns.ReLU
         ⎕THIS
     }

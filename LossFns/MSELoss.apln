@@ -3,7 +3,7 @@
     
     (⎕IO ⎕ML) ← 0 1
     
-    loss ← {
+    Loss ← {
         ⍝ Computes the loss between the expected output and the target.
         ⍝ ⍵: array with the network output.
         ⍝ ⍺: array with the expected output, same shape as ⍵.
@@ -12,7 +12,7 @@
         (+/d)÷≢d
     }           
     
-    dloss ← {
+    DLoss ← {
         ⍝ Derivative of the loss function w.r.t. network output.
         ⍝ ⍵: array with the network output.
         ⍝ ⍺: array with the expected output, same shape as ⍵.

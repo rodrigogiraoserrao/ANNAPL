@@ -6,6 +6,6 @@
     ⍝ Vector of namespaces holding the layers of the network.
     layers ← 0⍴#
     
-    loss ← 0⍨
+    Loss ← 0⍨
 :EndNamespace
 
