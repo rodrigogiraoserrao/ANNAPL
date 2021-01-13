@@ -1,0 +1,21 @@
+:Namespace Sigmoid
+    ⍝ Sigmoid activation function namespace.
+    
+    (⎕IO ⎕ML) ← 0 1
+    
+      F←{
+        ⍝ Forward pass of the sigmoid activation function.
+        ⍝ ⍵: array with values.
+        ⍝ Returns array with same shape with sigmoid values.
+          ÷1+*-⍵
+      }
+    
+      DF←{
+        ⍝ Derivative of the sigmoid activation function.
+        ⍝ ⍵: array with values to find the derivative on.
+        ⍝ Returns array of same shape with values of the derivative.
+          vs←⎕THIS.F ⍵
+          vs×1-vs
+      }
+:EndNamespace
+
