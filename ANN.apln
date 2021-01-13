@@ -8,7 +8,7 @@
     ⍝ Vector of namespaces holding the layers of the network.
     layers ← 0⍴#
     ⍝ Loss function namespace of the network.
-    Loss ← ⎕NS''
+    LossFn ← ⎕NS''
     
     Feed ← {
         ⍝ Compute the output of the network on an input vector.
@@ -24,7 +24,7 @@
         dWs ← ⍬
         dbs ← ⍬             
         xs ← 1↓⌽⍵
-        dxs ← ⊂⍺ Loss.DLoss⊃⌽⍵
+        dxs ← ⊂⍺ LossFn.DLoss⊃⌽⍵
         BP ← {                                             
             ⍝ Auxiliary function.
             ⍝ The layers and xs are in the reverse natural order of the network,

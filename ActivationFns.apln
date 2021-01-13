@@ -1,0 +1,58 @@
+:Namespace ActivationFns
+    ⍝ Activation functions for the layers.
+    ⍝ Each activation function is a namespace that defines two functions, F and DF,
+    ⍝  that implement the activation function itself and its derivative.
+
+    (⎕IO ⎕ML) ← 0 1
+
+    :Namespace ReLU
+        ⍝ Rectified Linear Unit
+
+        F ← {
+            ⍝ ⍵: array with values to compute the function on.
+            ⍝ Returns an array with the same shape as ⍵ with the function values.
+            0⌈⍵
+        }
+
+        DF ← {
+            ⍝ ⍵: array with values to compute the derivative on.
+            ⍝ Returns an array with the same shape as ⍵ with the derivative values.
+            0<⍵
+        }
+    :EndNamespace
+
+    :Namespace LeakyReLU
+        ⍝ Leaky Rectified Linear Unit
+
+        ⍝ Parameter that defines the slope of the function for negative values.
+        ⍝ Typically set to a positive number less than 1.
+        leaky ← 0.01
+
+        F ← {
+            ⍝ ⍵: array with values to compute the function on.
+            ⍝ Returns an array with the same shape as ⍵ with the function values.
+            (leaky×0⌊⍵)+0⌈⍵
+        }
+
+        DF ← {
+            ⍝ ⍵: array with values to compute the derivative on.
+            ⍝ Returns an array with the same shape as ⍵ with the derivative values.
+            (leaky×-×0⌊⍵)+0<⍵
+        }
+    :EndNamespace
+
+    :Namespace Sigmoid
+        ⍝ Sigmoid function
+
+        F ← {
+            ⍝ ⍵: array with values to compute the function on.
+            ⍝ Returns an array with the same shape as ⍵ with the function values.
+            ÷1+*-⍵ 
+        }
+
+        DF ← {
+            ⍝ ⍵: array with values to compute the derivative on.
+            vs×1-vs←F⍵
+        }
+    :EndNamespace
+:EndNamespace

@@ -1,0 +1,16 @@
+:Namespace Utils
+    ⍝ Utility functions for the code.
+
+    (⎕IO ⎕ML) ← 0 1
+
+    MakeNormalRandomArray←{
+        ⍝ Create array with normally distributed random values.
+        ⍝ ⍵: shape of the resulting array.
+        ⍝ ⍺: mean and standard deviation of normal distribution used, defaults to (0, 1).
+        ⍝ Uses the Box-Müller Transform, cf. https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
+        ⍺ ← 0 1
+        (mu sd) ← ⍺
+        s ← 2○2×○?⍵⍴0
+        mu+sd×s×0.5*⍨¯2×⍟?⍵⍴0
+    }
+:EndNamespace
