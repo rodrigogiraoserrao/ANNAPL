@@ -5,7 +5,14 @@
     
     ⍝ Vector of namespaces holding the layers of the network.
     layers ← 0⍴#
+    ⍝ Loss function namespace of the network.
+    Loss ← ⎕NS''
     
-    Loss ← 0⍨
-:EndNamespace
+    Feed ← {
+        ⍝ Compute the output of the network on an input vector.
+        ⍝ ⍵: network input array.
+        ⍝ returns an array with the output of the network.
+        ⊃{⍺.Feed ⍵}/ (⊂⍵),⍨⌽⎕THIS.layers
+    }
+:EndNamespace          
 
