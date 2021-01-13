@@ -1,0 +1,16 @@
+:Namespace ReLU
+    ⍝ Rectified Linear Unit activation function.
+    (⎕IO ⎕ML) ← 0 1
+    
+    f ← {
+        ⍝ Forward pass of the ReLU activation function.
+        ⍝ ⍵: array with values.
+        0⌈⍵
+    }
+    
+    df ← {
+        ⍝ Derivative of the ReLU activation function.
+        ⍝ ⍵: array with values to find the derivative on.
+        0<⍵
+    }
+:EndNamespace

@@ -1,0 +1,20 @@
+:Namespace LeakyReLU
+    ⍝ Leaky Rectified Linear Unit activation function.
+    (⎕IO ⎕ML) ← 0 1                      
+    
+    ⍝ Parameter that defines the slope of the function for negative values.
+    ⍝ Typically set to a positive value less than 1.
+    leaky ← 0.01
+    
+    f ← {
+        ⍝ Forward pass of the Leaky ReLU.
+        ⍝ ⍵: array with values.
+        (leaky×0⌊⍵)+0⌈⍵
+    }
+    
+    df ← {
+        ⍝ Derivative of the Leaky ReLU activation function.
+        ⍝ ⍵: array with values.
+        (leaky××0⌊⍵)+0<⍵
+    }
+:EndNamespace
