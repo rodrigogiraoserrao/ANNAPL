@@ -32,7 +32,7 @@
         ⍝ Typically set to a positive number less than 1.
         leaky ← 0.01      
         F ← {
-            0⌈⍵+leaky×0⌊⍵
+            (0⌈⍵)+leaky×0⌊⍵
         }    
         DF ← {
             (0≤⍵)+leaky×-×0⌊⍵
