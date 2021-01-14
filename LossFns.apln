@@ -5,24 +5,57 @@
     ⍝  of the loss function w.r.t. to the network output.
     ⍝ Both functions expect the array with the final output of the network on the right
     ⍝  and the expected output on the left.
+    
+    ⍝ R ← X Loss Y
+    ⍝ Y is the array with the network outputs.
+    ⍝ X is the array with the expected outputs, same dimensions as Y.
+    ⍝ R numeric scalar representing the loss.
 
     (⎕IO ⎕ML) ← 0 1
-
-    :Namespace MSELoss
-        ⍝ Mean Squared Error loss function.
+    
+    :Namespace BCELoss
+        ⍝ Binary Cross Entropy Loss.
+        ⍝ The expected outputs should be between 0 and 1.
         
         Loss ← {
-            ⍝ ⍵: array with the network output.
-            ⍝ ⍺: array with the expected output, same shape as ⍵.
-            ⍝ Returns a numeric scalar representing the loss.
+            x ← ⍺×⍟⍵
+            +/,-x+(1-⍺)×⍟1-⍵
+        }
+        DLoss ← {
+            (⍵-⍺)÷⍵-⍵*2    
+        }
+    :EndNamespace
+    
+    :Namespace CrossEntropyLoss
+        ⍝ Cross Entropy Loss.
+        ⍝ The left argument to Loss and DLoss is the index of the expected class,
+        ⍝  0-indexed.
+        
+        Loss ← {
+            -⍟(*⍺⌷⍵)÷+/*⍵
+        }
+        DLoss ← {
+            es ← *⍵
+            ds ← es÷+/es
+            ds+(⍴⍵)↑⍸⍣¯1⊢,⍺
+        }    
+    :EndNamespace
+    
+    :Namespace L1Loss
+        ⍝ L1 Loss function, sum of the absolute values of the differences.
+        
+        Loss ← +/∘,|⍤-
+        DLoss ← ×⍤(-⍨)
+    :EndNamespace
+
+    :Namespace MSELoss
+        ⍝ Mean Squared Error loss function is the euclidean distance.
+        
+        Loss ← {
             d ← 2*⍨,⍵-⍺
             (+/d)÷≢d
         }           
-        
         DLoss ← {
-            ⍝ ⍵: array with the network output.
-            ⍝ ⍺: array with the expected output, same shape as ⍵.
-            ⍝ Returns an array of derivatives with the shape of ⍵.
             n ← ×/⍴⍵
             n÷⍨2×⍵-⍺
         }
