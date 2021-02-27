@@ -7,17 +7,17 @@
 
     (⎕IO ⎕ML)←0 1
 
-    actFn ← ⎕NS #.ActivationFns.LeakyReLU
+    actFn ← ⎕NS ##.ActivationFns.LeakyReLU
     actFn.leaky ← 0.1
 
-    layer1 ← #.Layer.Init 2 3
+    layer1 ← ##.Layer.Init 2 3
     layer1.ActivationFn ← ⎕NS actFn
-    layer2 ← #.Layer.Init 3 1
+    layer2 ← ##.Layer.Init 3 1
     layer2.ActivationFn ← ⎕NS actFn
 
-    net ← ⎕NS #.ANN
+    net ← ⎕NS ##.ANN
     net.layers ← layer1 layer2
-    net.LossFn ← #.LossFns.MSELoss
+    net.LossFn ← ##.LossFns.MSELoss
     net.lr ← 0.1
 
     R ← (⌊0.5+⊢) ⍝ Round to nearest integer.

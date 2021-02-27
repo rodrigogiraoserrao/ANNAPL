@@ -6,7 +6,7 @@
     ⍝ Learning rate parameter
     lr ← 0.01
     ⍝ Vector of namespaces holding the layers of the network.
-    layers ← 0⍴#
+    layers ← 0⍴⎕NS''
     ⍝ Loss function namespace of the network.
     LossFn ← ⎕NS''
     

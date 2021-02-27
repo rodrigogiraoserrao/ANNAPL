@@ -15,9 +15,9 @@
         ⍝ Returns a Layer namespace initialised.
         layer ← ⎕NS⎕THIS
         layer.shape ← ⍵
-        layer.weights ← (0,÷0.5*⍨×/  ⍵) #.Utils.MakeNormalRandomArray ⌽⍵
-        layer.bias    ← (0,÷0.5*⍨×/1↓⍵) #.Utils.MakeNormalRandomArray 1,⍨1↓⍵
-        layer.ActivationFn ← #.ActivationFns.ReLU
+        layer.weights ← (0,÷0.5*⍨×/  ⍵) ##.Utils.MakeNormalRandomArray ⌽⍵
+        layer.bias    ← (0,÷0.5*⍨×/1↓⍵) ##.Utils.MakeNormalRandomArray 1,⍨1↓⍵
+        layer.ActivationFn ← ##.ActivationFns.ReLU
         layer
     }
     

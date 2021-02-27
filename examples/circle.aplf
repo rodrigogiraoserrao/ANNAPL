@@ -22,14 +22,14 @@
     trouts ← outs↑⍨-⌊n×1-split
 
     layer1 ← #.Layer.Init 2 4
-    layer1.ActivationFn ← ⎕NS #.ActivationFns.LeakyReLU
+    layer1.ActivationFn ← ⎕NS ##.ActivationFns.LeakyReLU
     layer2 ← #.Layer.Init 4 1
-    layer2.ActivationFn ← ⎕NS #.ActivationFns.Sigmoid
+    layer2.ActivationFn ← ⎕NS ##.ActivationFns.Sigmoid
 
-    net ← ⎕NS #.ANN
+    net ← ⎕NS ##.ANN
     net.lr ← 0.03
     net.layers ← layer1 layer2
-    net.LossFn ← ⎕NS #.LossFns.MSELoss
+    net.LossFn ← ⎕NS ##.LossFns.MSELoss
 
     PP ← { ⍝ Print the Performance of the network.
         ins ← ins↑⍨-⌊0.1×n
