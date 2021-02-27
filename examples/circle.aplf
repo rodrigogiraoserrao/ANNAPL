@@ -21,9 +21,9 @@
     trins  ←  ins↑⍨-⌊n×1-split
     trouts ← outs↑⍨-⌊n×1-split
 
-    layer1 ← #.Layer.Init 2 4
+    layer1 ← ##.Layer.Init 2 4
     layer1.ActivationFn ← ⎕NS ##.ActivationFns.LeakyReLU
-    layer2 ← #.Layer.Init 4 1
+    layer2 ← ##.Layer.Init 4 1
     layer2.ActivationFn ← ⎕NS ##.ActivationFns.Sigmoid
 
     net ← ⎕NS ##.ANN
@@ -43,9 +43,11 @@
 
     PP net
 
-    :For _ :In ⍳300
+    ⍞← (⎕UCS 10),'Training... '
+    :For i :In ⍳300
         ⍝ Train the network on all training data.
         _ ← trouts net.Train∘⍪¨ trins
+        ⍞← '#'/⍨0=10|i
     :EndFor
 
     PP net
