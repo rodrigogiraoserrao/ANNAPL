@@ -1,0 +1,7 @@
+∇ xs ← (net _FeedForward) input ;layer
+    ⍝ Feed the `input` vector through the network.
+    xs ← ,⊂input
+    :For layer :In net.layers
+        xs ,← ⊂layer Feed ⊃⌽xs
+    :EndFor
+∇

@@ -1,0 +1,17 @@
+∇ {net} ← target (net _Train) input
+    ;layer ;dx ;dW ;db ;x ;xs
+    ⍝ Train the given network on the `input` vector given,
+    ⍝ assuming `target` specifies the expected net output.
+    ⍝ Uses the backpropagation algorithm to compute the partial derivatives
+    ⍝ efficiently.
+
+    xs ← net Feed input
+    dx ← target net.LossFn_.dloss⊃⌽xs
+    :For (x layer) :InEach ⌽¨net.layers (¯1↓xs)
+        db ← dx×layer.ActFn_.dF layer.bias+layer.weights+.×x
+        dx ← db+.×⍨⍉layer.weights
+        dW ← db+.×⍉x
+        layer.bias -← net.lr×db
+        layer.weights -← net.lr×dW
+    :EndFor
+∇

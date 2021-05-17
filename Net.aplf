@@ -1,0 +1,13 @@
+∇ net ← layers Net (lossFn lr) ;layersFMT
+    ⍝ Create a neural network.
+    ⍝ `lossFn` is a reference to a namespace that defines `Loss` and `DLoss` methods.
+    ⍝ `lr` is a fractional number defining the learning rate.
+    ⍝ `layers` is an array of references to namespaces returned by `Layer`.
+
+    net ← ⎕NS⍬
+    net.layers ← layers
+    net.lr ← lr
+    net.LossFn_ ← ⎕NS lossFn
+    layersFMT ← '(',')',⍨⊃(⊣,' ',⊢)/⍕¨,layers
+    net.⎕DF layersFMT,' ',(⊃⎕SI),' ',(⊃¯1↑'.'(≠⊆⊢)⍕lossFn),' ',⍕lr
+∇

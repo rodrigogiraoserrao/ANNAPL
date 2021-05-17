@@ -16,7 +16,7 @@
     :Namespace Id
         ⍝ Identity function (same as "no activation function")
         F ← ⊢
-        DF ← (1⍴⍨⍴)
+        DF ← 1⍨¨
     :EndNamespace
 
     :Namespace ReLU
@@ -31,12 +31,8 @@
         ⍝ Parameter that defines the slope of the function for negative values.
         ⍝ Typically set to a positive number less than 1.
         leaky ← 0.01      
-        F ← {
-            (0⌈⍵)+leaky×0⌊⍵
-        }    
-        DF ← {
-            (0≤⍵)+leaky×-×0⌊⍵
-        }
+        F ← leaky∘(×⌈⊢)    
+        DF ← leaky∘(⊣⌈×)
     :EndNamespace
     
     :Namespace ELU
@@ -59,26 +55,20 @@
         F ← {       
             ÷1+*-⍵ 
         }   
-        DF ← {                                                  
-            vs×1-vs←F⍵
-        }
+        DF ← (⊢×1-⊢)∘F
     :EndNamespace
     
     :Namespace Tanh
         ⍝ Hyperbolic Tangent
 
         F ← 7∘○
-        DF ← {
-            1-2*⍨F ⍵
-        }
+        DF ← (1-2*⍨F)
     :EndNamespace
     
     :Namespace ArcTan
         ⍝ Arc Tangent
         
         F ← ¯7∘○
-        DF ← {
-            ÷1+⍵*2
-        }
+        DF ← (÷1+*∘2)
     :EndNamespace
 :EndNamespace

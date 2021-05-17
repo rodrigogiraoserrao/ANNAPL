@@ -1,0 +1,4 @@
+Feed ← {
+    ⍝ Feed an input vector ⍵ through the layer ⍺.
+    ⍺.ActFn_.F ⍺.bias+⍺.weights+.×⍵
+}

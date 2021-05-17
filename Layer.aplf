@@ -1,0 +1,14 @@
+∇ layer ← actFn Layer shape ;Std
+    ⍝ Create a layer of a neural network.
+    ⍝ `(in out) ← shape` is a pair of integers
+    ⍝ that specify the sizes of the input and output vectors of the layer.
+    ⍝ `actFn` is a reference to a namespace that defines functions F and dF.
+
+    layer ← ⎕NS⍬
+    layer.shape ← shape
+    Std ← ÷0.5*⍨×/
+    layer.weights ← ((0,Std) Utils.MakeNormalRandomArray   ⌽)   shape
+    layer.bias    ← ((0,Std) Utils.MakeNormalRandomArray ,∘1) 1↓shape
+    layer.ActFn_ ← ⎕NS actFn
+    layer.⎕DF '(',')',⍨(⊃¯1↑'.'(≠⊆⊢)⍕actFn),' ',(⊃⎕SI),' ',⍕shape
+∇
