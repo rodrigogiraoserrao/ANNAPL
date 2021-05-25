@@ -7,8 +7,8 @@
     layer ← ⎕NS⍬
     layer.shape ← shape
     Std ← ÷0.5*⍨×/
-    layer.weights ← ((0,Std) Utils.MakeNormalRandomArray   ⌽)   shape
-    layer.bias    ← ((0,Std) Utils.MakeNormalRandomArray ,∘1) 1↓shape
+    layer.weights ← ((0,Std) MakeNormalRandomArray   ⌽)   shape
+    layer.bias    ← ((0,Std) MakeNormalRandomArray ,∘1) 1↓shape
     layer.ActFn_ ← ⎕NS actFn
     layer.⎕DF '(',')',⍨(⊃¯1↑'.'(≠⊆⊢)⍕actFn),' ',(⊃⎕SI),' ',⍕shape
 ∇
