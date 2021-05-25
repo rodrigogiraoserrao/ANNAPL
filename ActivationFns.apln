@@ -30,9 +30,9 @@
 
         ⍝ Parameter that defines the slope of the function for negative values.
         ⍝ Typically set to a positive number less than 1.
-        leaky ← 0.01      
-        F ← leaky∘(×⌈⊢)    
-        DF ← leaky∘(⊣⌈×)
+        leaky ← 0.1
+        F ← leaky∘(×⌈⊢)
+        DF ← leaky∘(⊣⌈×⍤⊢)
     :EndNamespace
     
     :Namespace ELU
