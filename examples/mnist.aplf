@@ -1,0 +1,37 @@
+∇ net ← MNIST
+    ;CSVR ;DATAFOLDER ;ft ;c
+    ;layers ;data ;targets ;inputs ;outs
+    ⍝ Train a neural network on the MNIST data set.
+
+    DATAFOLDER ← 'C:\Users\rodri\Documents\Programming\ANNAPL\examples\mnistdata\'
+    ⍝ Create the network with the correct structure.
+    layers ← (##.ActivationFns.LeakyReLU ##.Layer 784 16)(##.ActivationFns.LeakyReLU ##.Layer 16 16)(##.ActivationFns.LeakyReLU ##.Layer 16 10)
+    net ← (layers) ##.Net ##.LossFns.MSELoss 0.001
+
+    CSVR ← {    ⍝ Read 1000 records at a time.
+        ⎕CSV⍠'Records'1000⊢⍵ '' 2
+    }
+
+    ft ← 0⎕NTIE⍨ DATAFOLDER,'mnist_train.csv'
+    data ← CSVR ft
+    c ← 0
+    :While 0<≢data
+        ⎕← c ← c+1
+        ⍝ Each row contains a target vector.
+        targets ← (⊣/data)=⍤0 1⊢(≢data)10⍴⍳10
+        inputs ← 0 1↓data
+        targets (net ##._Train)⍥⍪⍤1⊢inputs
+        data ← CSVR ft
+    :EndWhile
+
+    ⍝ Test the network to check final accuracy.
+    ft ← 0⎕NTIE⍨ DATAFOLDER,'mnist_test.csv'
+    data ← CSVR ft ⋄ outs ← ⍬
+    :While 0<≢data
+        targets ← ⊣/data
+        inputs ← 0 1↓data
+        outs ,← targets=(⊃∘⍸⌈⌿=,)∘(⊃⌽)∘(net ##._FeedForward)∘⍪⍤1⊢inputs
+        data ← CSVR ft
+    :EndWhile
+    ⎕← 'Final accuracy of ',⍕(⊢⌹=⍨)outs
+∇
