@@ -30,7 +30,7 @@
     ⍝⍝ └────────────┴──────────────┴────────────┘
 
     ⍝ Train the network.
-    _← (1000↓targets)(net _Train)⍥⍪⍤0 1⊢1000↓data
+    (1000↓targets)(net _Train)⍥⍪⍤0 1⊢1000↓data
     ⍞← 'Final accuracy is ',⍕(⊢⌹=⍨)(1000↑targets)=⌊0.5+∊{⊃⌽net _FeedForward⍪⍵}⍤1⊢1000↑data
     ⎕CS oldns   ⍝ Restore the correct namespace.
 ∇
