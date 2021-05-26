@@ -28,7 +28,7 @@
     outs ← ⍬
     :While 0<≢data ← ReadChunk ft
         (targets inputs) ← SplitData data
-        outs,← targets={⊃⍒⊃⌽net ##._FeedForward ⍵}⍥⍪⍤1⊢inputs
+        outs ,← targets={⊃⍒⊃⌽net ##._FeedForward ⍵}⍥⍪⍤1⊢inputs
     :EndWhile
     ⎕NUNTIE ft
     ⍞← (⎕UCS 10),'Final accuracy of ',⍕(⊢⌹=⍨)outs

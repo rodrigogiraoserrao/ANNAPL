@@ -1,0 +1,36 @@
+∇ net ← Corner _ ;oldns ;l1 ;l2 ;data ;targets
+    oldns ← ⎕CS ##  ⍝ Move into the ANNAPL namespace
+                    ⍝ just to avoid typing ##. everywhere.
+
+    ⍝ Build the layers and the network.
+    l1 ← ActivationFns.LeakyReLU Layer 2 4
+    l2 ← ActivationFns.Sigmoid Layer 4 1
+    net ← l1 l2 Net LossFns.MSELoss 0.03
+    ⍝⍝       net
+    ⍝⍝ ((LeakyReLU Layer 2 4) (Sigmoid Layer 4 1)) Net MSELoss 0.03
+
+    ⍝ Create dummy training data.
+    data ← ?10000 2⍴0
+    ⍝⍝       3↑data
+    ⍝⍝ 0.4169558424 0.7496170932
+    ⍝⍝ 0.2184504522 0.04436864744
+    ⍝⍝ 0.3428227278 0.7953738888
+
+    ⍝ Identify the points on the upper-right half of the [0, 1]×[0, 1] square.
+    targets ← 1>+/data
+    ⍝⍝       3↑targets
+    ⍝⍝ 0 1 0
+    ⍝⍝ 
+    ⍝⍝       net _FeedForward ⍉1↑data
+    ⍝⍝ ┌────────────┬──────────────┬────────────┐
+    ⍝⍝ │0.4169558424│ 1.393279219  │0.3987387427│
+    ⍝⍝ │0.7496170932│¯0.02555361609│            │
+    ⍝⍝ │            │¯0.02135486807│            │
+    ⍝⍝ │            │ 0.4051965863 │            │
+    ⍝⍝ └────────────┴──────────────┴────────────┘
+
+    ⍝ Train the network.
+    _← (1000↓targets)(net _Train)⍥⍪⍤0 1⊢1000↓data
+    ⍞← 'Final accuracy is ',⍕(⊢⌹=⍨)(1000↑targets)=⌊0.5+∊{⊃⌽net _FeedForward⍪⍵}⍤1⊢1000↑data
+    ⎕CS oldns   ⍝ Restore the correct namespace.
+∇
