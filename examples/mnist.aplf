@@ -1,4 +1,4 @@
-∇ net ← MNIST
+∇ {net} ← MNIST _
     ;ReadChunk ;SplitData ;dir ;ft
     ;layers ;data ;targets ;targetOuts ;inputs ;outs
     ⍝ Train a neural network on the MNIST data set.

@@ -1,6 +1,6 @@
-∇ net ← Corner _ ;oldns ;l1 ;l2 ;data ;targets
-    oldns ← ⎕CS ##  ⍝ Move into the ANNAPL namespace
-                    ⍝ just to avoid typing ##. everywhere.
+∇ {net} ← Corner _ ;l1 ;l2 ;data ;targets
+    ⎕CS ##  ⍝ Move into the ANNAPL namespace
+            ⍝ just to avoid typing ##. everywhere.
 
     ⍝ Build the layers and the network.
     l1 ← ActivationFns.LeakyReLU Layer 2 4
@@ -32,5 +32,4 @@
     ⍝ Train the network.
     (1000↓targets)(net _Train)⍥⍪⍤0 1⊢1000↓data
     ⍞← 'Final accuracy is ',⍕(⊢⌹=⍨)(1000↑targets)=⌊0.5+∊{⊃⌽net _FeedForward⍪⍵}⍤1⊢1000↑data
-    ⎕CS oldns   ⍝ Restore the correct namespace.
 ∇
