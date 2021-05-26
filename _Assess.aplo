@@ -1,4 +1,4 @@
 _Assess ← {
     ⍝ Compute the loss of the network ⍺⍺ on the network input ⍵ if the expected target is ⍺
-    ⍺ ⍺⍺.LossFn_.loss⊃⌽⍺⍺ _FeedForward ⍵
+    ⍺ ⍺⍺.LossFn_.Loss⊃⌽⍺⍺ _FeedForward ⍵
 }
